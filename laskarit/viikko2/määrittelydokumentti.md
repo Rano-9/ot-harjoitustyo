@@ -41,4 +41,4 @@ Peli loppuu jos ei pysty tehdä siirtoa.
 Jokaisella laatalla on mahdollista käydä 3 kertaa. Sen jälkeen laatta putoaa pelistä ja kentään syntyy aukkoja.  
 
 
-Jatkokehityksenä on toeuttaa pelin muut nappulat jotka liikkuvat kuin shakki nappulat. 
+Jatkokehityksenä on toeuttaa pelin muut laatat jotka liikkuvat kuin shakki nappulat. 
