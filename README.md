@@ -9,6 +9,6 @@ Linkit:
 
 
 ## Asennus
-Sovelluksen saa asennettua suorittamalla seuraavat komennot järjestyksessä.
+Sovelluksen saa asennettua suorittamalla seuraavat komennot ```peli-app hakemistossa```.
 - ``` poetry install ```
 - ``` poetry run invoke start ```
