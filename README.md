@@ -12,6 +12,8 @@ Linkit:
 
 
 ## Asennus
+Sovelluksen saa asennettua suorittamalla seuraavat komennot järjestyksessä.
 
 ``` poetry install ```
+
 ``` poetry run invoke start ```
