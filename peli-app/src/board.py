@@ -46,5 +46,7 @@ class Board:
                      #ratkaistaan y
                      y = loc[1] + num*j
                      if y >= 0 and (x,y) != loc and y < self.board_size:
-                        self.allowed.add(self.board[x][y])
-                        print("next tile coordinate",x,y)
+                        tile = self.board[x][y]
+                        if tile.hits < 4:
+                            self.allowed.add(tile)
+                            print("next tile coordinate",x,y)

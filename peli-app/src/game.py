@@ -18,7 +18,7 @@ class GameLoop:
             
     def _handle_events(self):
         for event in self._event_queue.get():
-            if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT or len(self._game.allowed) == 0:
                 return False
             
             if event.type == pygame.MOUSEBUTTONDOWN:
