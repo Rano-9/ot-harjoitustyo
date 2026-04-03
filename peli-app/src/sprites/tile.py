@@ -1,19 +1,50 @@
 import pygame
 import os
+from random import randint
 dirname = os.path.dirname(__file__)
+
 
 class Tile(pygame.sprite.Sprite):
 
-    def __init__(self, x =0, y= 0, id=None):
+    def __init__(self, loc=None, size=50):
         super().__init__()
-        self.id = id
-        self.image = pygame.image.load(
-            os.path.join(dirname,"..","assets","tile.png")
-        )
-        self.location = (x,y)
+        self.location = loc
+        self.hits = 0
+
+        self.image = self.click()
         self.rect = self.image.get_rect()
+        
+
+
+        
+
 
     def click(self):
-        self.image = pygame.image.load(
-            os.path.join(dirname,"..","assets","tile1.png")
-        )
+        self.num = self.new_num()
+        color = ""
+        path = None
+        match self.hits:
+            case 0:
+                color = "green"
+                path = os.path.join(dirname,"assets",color,f"{self.num}.png")
+            case 1:
+                color = "yellow"
+                path = os.path.join(dirname,"assets",color,f"{self.num}.png")
+            case 2:
+                color = "red"
+                path = os.path.join(dirname,"assets",color,f"{self.num}.png")
+            case 3:
+                self.image.fill((0,0,0)) 
+        
+        self.hits += 1
+
+        if path is not None:
+            self.image = pygame.image.load(path)
+
+        return self.image
+
+
+    def new_num(self):
+        num = randint(1,4)
+
+        return num

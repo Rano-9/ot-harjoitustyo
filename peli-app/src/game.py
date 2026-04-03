@@ -18,9 +18,21 @@ class GameLoop:
             
     def _handle_events(self):
         for event in self._event_queue.get():
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                pos = pygame.mouse.get_pos()
-                self._game.board[floor(pos[0]/50)][floor(pos[1]/50)].click()
-
             if event.type == pygame.QUIT:
                 return False
+            
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pos = pygame.mouse.get_pos()
+                x = floor(pos[0]/50)
+                y = floor(pos[1]/50)
+                tile = self._game.board[x][y]
+                if tile in self._game.allowed:
+                    num = tile.num
+                    loc = tile.location
+                    tile.click()
+                    print("tile coordinate:",x,y)
+                    self._game.get_allowed(num,loc)
+                    
+
+
+            

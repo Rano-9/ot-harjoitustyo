@@ -1,5 +1,6 @@
 import pygame
 from invoke import task
+import os
 
 from board import Board
 from event_handler import EventQueue
@@ -10,19 +11,19 @@ CELL_SIZE = 50
 BOARD_SIZE = 6
 
 def main():
-    game = Board(BOARD_SIZE,CELL_SIZE)
     display_height = CELL_SIZE *BOARD_SIZE
     display_width = CELL_SIZE *BOARD_SIZE
     display = pygame.display.set_mode((display_width,display_height))
     pygame.display.set_caption("Blacksmithing")
+    
+    pygame.init()
 
+    game = Board(BOARD_SIZE,CELL_SIZE)
     event_queue = EventQueue()
     renderer = Renderer(display,game)
     
 
-
-
-    pygame.init()
+    
     game.all_sprites.draw(display)
     
     game_loop = GameLoop(game,renderer,event_queue,CELL_SIZE)
