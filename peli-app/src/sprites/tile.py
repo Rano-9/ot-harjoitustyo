@@ -8,10 +8,11 @@ class Tile(pygame.sprite.Sprite):
 
     def __init__(self, loc=None, size=50):
         super().__init__()
+        
         self.location = loc
         self.hits = 0
-
-        self.image = self.click()
+        self.image = None
+        self.click()
         self.rect = self.image.get_rect()
 
     def click(self):
@@ -39,7 +40,7 @@ class Tile(pygame.sprite.Sprite):
         if path is not None:
             self.image = pygame.image.load(path)
 
-        return self.image
+        return (self.num, self.location) 
 
     def new_num(self):
         num = randint(1, 4)

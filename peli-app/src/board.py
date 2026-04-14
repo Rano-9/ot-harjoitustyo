@@ -33,15 +33,17 @@ class Board:
 
         self.all_sprites.add(self.tiles)
 
-    def get_allowed(self, num, loc):
+    def get_allowed(self, tile):
         self.allowed.clear()
 
+        num, loc = tile
+        # käydään kohteet läpi x akselin -1 0 1 suhteessa iskettyyn numeroon 
         for i in range(-1, 2):
-
             # ratkaistaan x
             x = loc[0] + num*i
             if x >= 0 and x < self.board_size:
-
+                
+                # Käydään sama mutta y akseli
                 for j in range(-1, 2):
                     # ratkaistaan y
                     y = loc[1] + num*j

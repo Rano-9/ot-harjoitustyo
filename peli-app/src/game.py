@@ -28,8 +28,5 @@ class GameLoop:
                 y = floor(pos[1]/50)
                 tile = self._game.board[x][y]
                 if tile in self._game.allowed:
-                    num = tile.num
-                    loc = tile.location
-                    tile.click()
                     print("tile coordinate:", x, y)
-                    self._game.get_allowed(num, loc)
+                    self._game.get_allowed(tile.click())
