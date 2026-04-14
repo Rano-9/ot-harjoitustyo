@@ -1,14 +1,16 @@
-import pygame
 import os
 from random import randint
+
+import pygame
+
 dirname = os.path.dirname(__file__)
 
 
 class Tile(pygame.sprite.Sprite):
 
-    def __init__(self, loc=None, size=50):
+    def __init__(self, loc=None):
         super().__init__()
-        
+
         self.location = loc
         self.hits = 0
         self.image = None
@@ -40,7 +42,7 @@ class Tile(pygame.sprite.Sprite):
         if path is not None:
             self.image = pygame.image.load(path)
 
-        return (self.num, self.location) 
+        return (self.num, self.location)
 
     def new_num(self):
         num = randint(1, 4)

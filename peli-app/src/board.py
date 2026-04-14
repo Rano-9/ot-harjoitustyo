@@ -1,5 +1,6 @@
-from sprites.tile import Tile
 import pygame
+
+from sprites.tile import Tile
 
 
 class Board:
@@ -13,7 +14,7 @@ class Board:
         for i in range(board_size):
             row = []
             for j in range(board_size):
-                tile = Tile((i, j), cell_size)
+                tile = Tile((i, j))
                 index += 1
                 row.append(tile)
                 self.allowed.add(tile)
@@ -37,12 +38,12 @@ class Board:
         self.allowed.clear()
 
         num, loc = tile
-        # käydään kohteet läpi x akselin -1 0 1 suhteessa iskettyyn numeroon 
+        # käydään kohteet läpi x akselin -1 0 1 suhteessa iskettyyn numeroon
         for i in range(-1, 2):
             # ratkaistaan x
             x = loc[0] + num*i
             if x >= 0 and x < self.board_size:
-                
+
                 # Käydään sama mutta y akseli
                 for j in range(-1, 2):
                     # ratkaistaan y

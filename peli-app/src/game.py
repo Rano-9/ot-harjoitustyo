@@ -1,6 +1,6 @@
-import pygame
 from math import floor
 
+import pygame
 
 class GameLoop:
     def __init__(self, game, renderer, event_queue, size):
@@ -9,18 +9,10 @@ class GameLoop:
         self._event_queue = event_queue
         self._size = size
 
-    def start(self):
-        clock = pygame.time.Clock()
-        while True:
-            if self._handle_events() == False:
-                break
-            self._renderer.render()
-            clock.tick(60)
-
     def _handle_events(self):
         for event in self._event_queue.get():
             if event.type == pygame.QUIT or len(self._game.allowed) == 0:
-                return False
+                return None
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
@@ -30,3 +22,12 @@ class GameLoop:
                 if tile in self._game.allowed:
                     print("tile coordinate:", x, y)
                     self._game.get_allowed(tile.click())
+                return None
+
+    def start(self):
+        clock = pygame.time.Clock()
+        while True:
+            if self._handle_events() is False:
+                break
+            self._renderer.render()
+            clock.tick(60)

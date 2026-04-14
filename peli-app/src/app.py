@@ -1,6 +1,4 @@
 import pygame
-from invoke import task
-import os
 
 from board import Board
 from event_handler import EventQueue
