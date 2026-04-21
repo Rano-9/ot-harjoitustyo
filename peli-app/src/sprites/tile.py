@@ -13,24 +13,35 @@ class Tile(pygame.sprite.Sprite):
 
         self.location = loc
         self.hits = 0
-        self.image = None
-        self.num = None
-        self.prev = self.num
-        self.click()
-        self.rect = self.image.get_rect()
+        self.num = self.new_num()
+        path = os.path.join(dirname, "assets", "green",f"{self.num}.png")        
+        self.images = [pygame.image.load(path)]
+        self.rects = [self.image.get_rect(center=loc)]
         
+    @property
+    def rect(self):
+        return self.rects[0]
     
+    @property
+    def image(self):
+        return self.images[0]
+    
+    @image.setter
+    def image(self, path):
+        self.images = [pygame.image.load(path)]
+        return self.images
+
+
+    def draw(self,surface):
+        surface.blit(self.image,self.rect)
+
+
     def click(self):
-        if self.num:
-            prev = self.num
+        prev = self.num
         
         self.num = self.new_num()
-
-        if not self.prev:
-            self.prev = self.num
-        
-        color = ""
         path = None
+        self.hits += 1
         match self.hits:
             case 0:
                 color = "green"
@@ -47,12 +58,12 @@ class Tile(pygame.sprite.Sprite):
             case 3:
                 self.image.fill((0, 0, 0))
 
-        self.hits += 1
+       
 
         if path is not None:
-            self.image = pygame.image.load(path)
+            self.image = path
 
-        return (self.prev, self.location)
+        return (prev, self.location)
 
     def new_num(self):
         num = randint(1, 4)

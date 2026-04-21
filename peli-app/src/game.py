@@ -13,8 +13,9 @@ class GameLoop:
         
 
     def _handle_events(self):
+        pos = None
+        click = False
         for event in self._event_queue.get():
-            click = False
             if event.type == pygame.QUIT:
                 return None
 
@@ -26,20 +27,35 @@ class GameLoop:
             if event.type == pygame.MOUSEBUTTONUP:
                 click = True
                 pos = pygame.mouse.get_pos()
-                x = floor(pos[0]/50)
-                y = floor(pos[1]/50)
-                if self._state == "start":
-                    if self._scenes["start"].text_surfaces.collidepoint(pos):
+                
+        
+        for i in self._scenes[self._state].surfaces:
+            if click:
+                pos = pygame.mouse.get_pos()
+                if i.rect.collidepoint(pos):
+                    if self._state == "start":
                         self._state = "game"
-                    
+                    elif self._state == "game":
+                        i.click()
 
-                elif self._state == "game":
-                    tile = self._scenes["game"].board[x][y]
-                    if tile in self._scenes["game"].allowed:
-                        print("tile coordinate:", x, y)
-                        self._scenes["game"].get_allowed(tile.click())
-                    return None
 
+
+#
+#        pos = pygame.mouse.get_pos()
+#        x = floor(pos[0]/50)
+#        y = floor(pos[1]/50)
+#        if self._state == "start":
+#            if self._scenes["start"].text_surfaces.collidepoint(pos):
+#                self._state = "game"
+#            
+#
+#        elif self._state == "game":
+#            tile = self._scenes["game"].board[x][y]
+#            if tile in self._scenes["game"].allowed:
+#                print("tile coordinate:", x, y)
+#                self._scenes["game"].get_allowed(tile.click())
+#            return None
+#
 
     def start(self):
         clock = pygame.time.Clock()
