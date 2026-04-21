@@ -10,7 +10,6 @@ class GameLoop:
         self._size = size
         self._state = "start"
 
-        
 
     def _handle_events(self):
         pos = None
@@ -18,11 +17,6 @@ class GameLoop:
         for event in self._event_queue.get():
             if event.type == pygame.QUIT:
                 return None
-
-            if self._state == "game":
-                if not self._scenes["game"].allowed:
-                    print(self._scenes["game"].allowed)
-                    self._state = "score"
 
             if event.type == pygame.MOUSEBUTTONUP:
                 click = True
@@ -35,32 +29,24 @@ class GameLoop:
                 if i.rect.collidepoint(pos):
                     if self._state == "start":
                         self._state = "game"
+
                     elif self._state == "game":
-                        i.click()
+                        if i.allow:
+                            record = i.click()
+                            print(record)
+                            allowed = self._scenes[self._state].get_allowed(record[1],record[0])
 
+                            self._scenes[self._state].surfaces.update(allowed,self._renderer._surface)
 
-
-#
-#        pos = pygame.mouse.get_pos()
-#        x = floor(pos[0]/50)
-#        y = floor(pos[1]/50)
-#        if self._state == "start":
-#            if self._scenes["start"].text_surfaces.collidepoint(pos):
-#                self._state = "game"
-#            
-#
-#        elif self._state == "game":
-#            tile = self._scenes["game"].board[x][y]
-#            if tile in self._scenes["game"].allowed:
-#                print("tile coordinate:", x, y)
-#                self._scenes["game"].get_allowed(tile.click())
-#            return None
-#
 
     def start(self):
         clock = pygame.time.Clock()
         while True:
+            if self._state == "game":
+                allowed = self._scenes[self._state].allowed
+            else:
+                allowed = set()
             if self._handle_events() is False:
                 break
-            self._renderer.render(self._state)
+            self._renderer.render(self._state,allowed)
             clock.tick(60)

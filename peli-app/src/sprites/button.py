@@ -33,11 +33,14 @@ class Element_button(Sprite):
         return self.rects[1] if self._mouse_over else self.rects[0]
     
     def draw(self,surface):
+    
         surface.blit(self.image,self.rect)
     
-    def update(self, mouse_pos):
+    def update(self, mouse_pos,surface):
+
         if self.rect.collidepoint(mouse_pos):
             self._mouse_over = True
         else:
             self._mouse_over = False
-        
+
+        self.draw(surface)

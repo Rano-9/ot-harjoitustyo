@@ -6,15 +6,16 @@ class Renderer:
         self._surface = surface
         self._scenes = scenes
 
-    def render(self,state):
+    def render(self,state,allowed):
         mouse_pos = pygame.mouse.get_pos()
         if state == "start":
             
             self._surface.fill((0,0,0))
-            self._scenes["start"].surfaces.update(mouse_pos)
-            self._scenes["start"].surfaces.draw(self._surface)
+            self._scenes["start"].surfaces.update(mouse_pos,self._surface)
+        #   self._scenes["start"].surfaces.draw(self._surface)
         
         if state == "game":
-            self._scenes["game"].surfaces.draw(self._surface)
+            self._scenes["game"].surfaces.update(allowed,self._surface)
+        #   self._scenes["game"].surfaces.draw(self._surface)
 
         pygame.display.update()
