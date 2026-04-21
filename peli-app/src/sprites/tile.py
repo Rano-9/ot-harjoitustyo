@@ -8,9 +8,9 @@ dirname = os.path.dirname(__file__)
 
 class Tile(pygame.sprite.Sprite):
 
-    def __init__(self, loc=None):
+    def __init__(self, index, loc=None):
         super().__init__()
-
+        self._id = None
         self.location = loc
         self.hits = 0
         self.num = self.new_num()
@@ -29,7 +29,15 @@ class Tile(pygame.sprite.Sprite):
     @image.setter
     def image(self, path):
         self.images = [pygame.image.load(path)]
-        return self.images
+
+    @property
+    def id(self):
+        return self._id
+    
+    @id.setter
+    def id(self,value):
+        self._id = value
+        print("set value",self._id)
 
 
     def draw(self,surface):
