@@ -3,6 +3,7 @@ import pygame
 from sprites.tile import Tile
 
 
+
 class Board:
     def __init__(self, board_size, cell_size):
         self.size = cell_size
@@ -20,8 +21,13 @@ class Board:
                 self.allowed.add(tile)
             self.board.append(row)
 
+        #States are star, game, score, end
+        self.state = "start"
+        
         self.all_sprites = pygame.sprite.Group()
         self._init_sprites()
+
+
 
     def _init_sprites(self):
         for x in range(self.board_size):
@@ -33,7 +39,7 @@ class Board:
                 self.tiles.add(cell)
 
         self.all_sprites.add(self.tiles)
-
+    
     def get_allowed(self, tile):
         self.allowed.clear()
 
