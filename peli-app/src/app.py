@@ -21,10 +21,10 @@ def main():
 
     pygame.init()
 
-    
     scenes = {
         "start" : Menu((display_height/2,display_width/2),["start","quit"],FONT_SIZE,TXT_RGB,BG_RGB),
-        "game" : Board(BOARD_SIZE, CELL_SIZE)
+        "game" : Board(BOARD_SIZE, CELL_SIZE),
+        "score" : Menu((display_height/2,display_width/2),["OUT OF MOVES","QUIT"],FONT_SIZE,TXT_RGB,BG_RGB)
     }
     event_queue = EventQueue()
     renderer = Renderer(display, scenes)

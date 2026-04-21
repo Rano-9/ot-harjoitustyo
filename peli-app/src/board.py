@@ -7,12 +7,12 @@ from sprites.tile import Tile
 
 class Board:
     def __init__(self, board_size, cell_size):
-        
+
         self.size = cell_size
         self.board_size = board_size
         self.surfaces = pygame.sprite.Group()
         self.allowed = set()
-        
+
         index = 0
         for i in range(board_size):
             for j in range(board_size):
@@ -25,7 +25,7 @@ class Board:
                 self.allowed.add(index)
                 self.surfaces.add(tile)
                 index += 1
-    
+
     def get_allowed(self, id,num):
         self.allowed.clear()
 

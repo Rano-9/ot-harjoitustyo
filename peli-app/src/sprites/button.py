@@ -14,9 +14,9 @@ class Element_button(Sprite):
 
         self._mouse_over = False
         surface_images = create_menu_text(text,font_size,txt_rgb,bg_rgb)
-        
+
         bigger_images = create_menu_text(text,font_size*1.2,txt_rgb,bg_rgb)
-        
+
         self.images = [surface_images,bigger_images]
         self.rects = [
             surface_images.get_rect(center=center),
@@ -27,15 +27,15 @@ class Element_button(Sprite):
     @property
     def image(self):
         return self.images[1] if self._mouse_over else self.images[0]
-    
+
     @property
     def rect(self):
         return self.rects[1] if self._mouse_over else self.rects[0]
-    
+
     def draw(self,surface):
-    
+
         surface.blit(self.image,self.rect)
-    
+
     def update(self, mouse_pos,surface):
 
         if self.rect.collidepoint(mouse_pos):

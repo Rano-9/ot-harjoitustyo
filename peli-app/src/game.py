@@ -14,17 +14,21 @@ class GameLoop:
     def _handle_events(self):
         pos = None
         click = False
+
+        #Katsotaan oliko eventtejä
         for event in self._event_queue.get():
             if event.type == pygame.QUIT:
                 return False
 
             if event.type == pygame.MOUSEBUTTONUP:
                 click = True
-                pos = pygame.mouse.get_pos()
-                
-        
-        for i in self._scenes[self._state].surfaces:
-            if click:
+                if self._state == "score":
+                    return False
+
+        #Jos oli tehdään jotain
+        if click:
+            for i in self._scenes[self._state].surfaces:
+
                 pos = pygame.mouse.get_pos()
                 if i.rect.collidepoint(pos):
                     if self._state == "start":
@@ -39,7 +43,7 @@ class GameLoop:
 
         if self._state == "game":
             if not self._scenes[self._state].allowed:
-                return False
+                self._state = "score"
 
     def start(self):
         clock = pygame.time.Clock()

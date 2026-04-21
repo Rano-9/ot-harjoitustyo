@@ -19,18 +19,18 @@ class Tile(pygame.sprite.Sprite):
 
         border_path = os.path.join(dirname,"assets","highlight.png")
         selection_path = os.path.join(dirname,"assets","selection.png")
-        path = os.path.join(dirname, "assets", "green",f"{self.num}.png")        
+        path = os.path.join(dirname, "assets", "green",f"{self.num}.png") 
         self.images = [pygame.image.load(path),pygame.image.load(border_path),pygame.image.load(selection_path)]
         self.rects = [self.images[0].get_rect(center=loc),self.images[1].get_rect(center=loc)]
-        
+
     @property
     def rect(self):
         return self.rects[0]
-    
+
     @property
     def image(self):
         return self.images[0]
-    
+
     @image.setter
     def image(self, path):
         self.images[0] = pygame.image.load(path)
@@ -38,7 +38,7 @@ class Tile(pygame.sprite.Sprite):
     @property
     def id(self):
         return self._id
-    
+
     @id.setter
     def id(self,value):
         self._id = value
@@ -55,7 +55,7 @@ class Tile(pygame.sprite.Sprite):
 
     def update(self, allowed,surface,pos=(-1,-1)):
         if self.id in allowed:
-            
+
             self.allow = True
             if self.rect.collidepoint(pos):
                 self.selected = True
@@ -63,14 +63,14 @@ class Tile(pygame.sprite.Sprite):
                 self.selected = False
         else:
             self.allow = False
-        
+
         self.draw(surface)
-        
-        
+
+
 
     def click(self):
         prev = self.num
-        
+
         self.num = self.new_num()
         path = None
         self.hits += 1

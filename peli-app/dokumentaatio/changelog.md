@@ -22,3 +22,4 @@
 - Peli todella loppuu kun sallitut liikeet loppuvat.
 - Pelin ikkunan voi nytten sulkea.
 - Lisätty peliin aloitus näkymä.
+- Lisätty peliin lopetus näkymä.
