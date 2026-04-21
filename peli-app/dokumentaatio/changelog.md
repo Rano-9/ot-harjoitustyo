@@ -14,3 +14,11 @@
 - Pelin laatat on selkeitä nähdä.
 
 - Lisätty testit jotka edustavat peliä.
+
+# Viikko 5
+
+- Muokattu elementtien toimintaa. Jokainen laittaa joka on valittavissa on korostetu mustalla ja kun sen päällä hoveraa se vaihtaa erikseen väriä.
+
+- Peli todella loppuu kun sallitut liikeet loppuvat.
+- Pelin ikkunan voi nytten sulkea.
+- Lisätty peliin aloitus näkymä.

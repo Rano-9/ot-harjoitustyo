@@ -8,16 +8,19 @@ dirname = os.path.dirname(__file__)
 
 class Tile(pygame.sprite.Sprite):
 
-    def __init__(self, index, loc=None):
+    def __init__(self, loc=None):
         super().__init__()
         self._id = None
         self.allow = True
+        self.selected = False
         self.location = loc
         self.hits = 0
         self.num = self.new_num()
+
         border_path = os.path.join(dirname,"assets","highlight.png")
+        selection_path = os.path.join(dirname,"assets","selection.png")
         path = os.path.join(dirname, "assets", "green",f"{self.num}.png")        
-        self.images = [pygame.image.load(path),pygame.image.load(border_path)]
+        self.images = [pygame.image.load(path),pygame.image.load(border_path),pygame.image.load(selection_path)]
         self.rects = [self.images[0].get_rect(center=loc),self.images[1].get_rect(center=loc)]
         
     @property
@@ -39,19 +42,25 @@ class Tile(pygame.sprite.Sprite):
     @id.setter
     def id(self,value):
         self._id = value
-        print("set value",self._id)
 
 
     def draw(self,surface):
         surface.blit(self.image,self.rect)
 
-        if self.allow:
+        if self.selected:
+            surface.blit(self.images[2],self.rect)
+        elif self.allow:
             surface.blit(self.images[1],self.rect)
 
 
-    def update(self, allowed,surface):
+    def update(self, allowed,surface,pos=(-1,-1)):
         if self.id in allowed:
+            
             self.allow = True
+            if self.rect.collidepoint(pos):
+                self.selected = True
+            else:
+                self.selected = False
         else:
             self.allow = False
         
@@ -65,7 +74,7 @@ class Tile(pygame.sprite.Sprite):
         self.num = self.new_num()
         path = None
         self.hits += 1
-        
+
         match self.hits:
             case 0:
                 color = "green"

@@ -16,7 +16,7 @@ class GameLoop:
         click = False
         for event in self._event_queue.get():
             if event.type == pygame.QUIT:
-                return None
+                return False
 
             if event.type == pygame.MOUSEBUTTONUP:
                 click = True
@@ -31,13 +31,15 @@ class GameLoop:
                         self._state = "game"
 
                     elif self._state == "game":
-                        if i.allow:
+                        if i.allow and i.hits < 4:
                             record = i.click()
-                            print(record)
                             allowed = self._scenes[self._state].get_allowed(record[1],record[0])
 
                             self._scenes[self._state].surfaces.update(allowed,self._renderer._surface)
 
+        if self._state == "game":
+            if not self._scenes[self._state].allowed:
+                return False
 
     def start(self):
         clock = pygame.time.Clock()
