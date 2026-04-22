@@ -6,18 +6,25 @@ class Renderer:
         self._surface = surface
         self._scenes = scenes
 
-    def render(self,state,allowed):
+    def render(self,state,allowed,score):
         mouse_pos = pygame.mouse.get_pos()
-        if state == "start":
+        for scene in self._scenes[state]:
+            if state == "start":
 
-            self._surface.fill((0,0,0))
-            self._scenes["start"].surfaces.update(mouse_pos,self._surface)
+                self._surface.fill((0,0,0))
+                scene.surfaces.update(mouse_pos,self._surface)
 
-        elif state == "game":
-            self._scenes["game"].surfaces.update(allowed,self._surface,mouse_pos)
+            elif state == "game":
+                if scene.type == "board":
+                    allowed = scene.allowed
+                    scene.surfaces.update(allowed,self._surface,mouse_pos)
 
-        elif state == "score":
-            self._surface.fill((0,0,0))
-            self._scenes["score"].surfaces.update(mouse_pos,self._surface)
+                else:
+                    scene.surfaces.update(allowed,self._surface,mouse_pos)
+
+            elif state == "score":
+                self._surface.fill((0,0,0))
+                scene.surfaces.update(mouse_pos,self._surface)
+
 
         pygame.display.update()

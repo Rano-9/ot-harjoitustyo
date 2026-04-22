@@ -8,10 +8,13 @@ from sprites.tile import Tile
 class Board:
     def __init__(self, board_size, cell_size):
 
+        self.surfaces = pygame.sprite.Group()
+        self.buttons = pygame.sprite.Group()
+
         self.size = cell_size
         self.board_size = board_size
-        self.surfaces = pygame.sprite.Group()
         self.allowed = set()
+        self.type = "board"
 
         index = 0
         for i in range(board_size):
@@ -44,3 +47,4 @@ class Board:
 
 
         return self.allowed
+

@@ -1,5 +1,3 @@
-from math import floor
-
 import pygame
 
 class GameLoop:
@@ -9,6 +7,7 @@ class GameLoop:
         self._event_queue = event_queue
         self._size = size
         self._state = "start"
+        self._score = 0
 
 
     def _handle_events(self):
@@ -27,32 +26,31 @@ class GameLoop:
 
         #Jos oli tehdään jotain
         if click:
-            for i in self._scenes[self._state].surfaces:
-
+            for scene in self._scenes[self._state]:
                 pos = pygame.mouse.get_pos()
-                if i.rect.collidepoint(pos):
-                    if self._state == "start":
-                        self._state = "game"
 
-                    elif self._state == "game":
-                        if i.allow and i.hits < 4:
-                            record = i.click()
-                            allowed = self._scenes[self._state].get_allowed(record[1],record[0])
+                for surface in scene.surfaces:
+                    if surface.rect.collidepoint(pos):
+                        if self._state == "start":
+                            self._state = surface.action()
 
-                            self._scenes[self._state].surfaces.update(allowed,self._renderer._surface)
+                        elif self._state == "game":
+                            if surface.allow and surface.hits < 4:
+                                record = surface.click()
+                                allowed = scene.get_allowed(record[1],record[0])
+                                self._score += record[0]
+                                scene.surfaces.update(allowed,self._renderer._surface)
 
-        if self._state == "game":
-            if not self._scenes[self._state].allowed:
-                self._state = "score"
+                                if not allowed:
+                                    self._state = "score"
+
+        if self._state == "quit":
+            return False
 
     def start(self):
         clock = pygame.time.Clock()
         while True:
-            if self._state == "game":
-                allowed = self._scenes[self._state].allowed
-            else:
-                allowed = set()
             if self._handle_events() is False:
                 break
-            self._renderer.render(self._state,allowed)
+            self._renderer.render(self._state,set(),self._score)
             clock.tick(60)
