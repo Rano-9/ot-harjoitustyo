@@ -39,7 +39,7 @@ class GameLoop:
                                 record = surface.click()
                                 allowed = scene.get_allowed(record[1],record[0])
                                 self._score += record[0]
-                                scene.surfaces.update(allowed,self._renderer._surface)
+                                scene.surfaces.update(allowed,None)
 
                                 if not allowed:
                                     self._state = "score"

@@ -10,13 +10,13 @@ class Board:
 
         self.surfaces = pygame.sprite.Group()
         self.buttons = pygame.sprite.Group()
+        self.tiles = []
 
         self.size = cell_size
         self.board_size = board_size
         self.allowed = set()
         self.type = "board"
 
-        index = 0
         
         for i in range(board_size):
             for j in range(board_size):
@@ -24,11 +24,11 @@ class Board:
                 y = cell_size/2
                 coord = (x + j*cell_size,y + i*cell_size)
                 tile = Tile(coord)
-                tile.id = index
+                self.tiles.append(tile)
+                tile.id = len(self.tiles)-1
 
-                self.allowed.add(index)
+                self.allowed.add(tile.id)
                 self.surfaces.add(tile)
-                index += 1
 
     def get_allowed(self, id,num):
         self.allowed.clear()
@@ -43,7 +43,7 @@ class Board:
                     pos_y = row + (j*num)
                     if pos_y < 6 and pos_y >=0:
                         pos = pos_y * self.board_size + pos_x
-                        if pos != id:
+                        if pos != id and self.tiles[pos].hits < 3:
                             self.allowed.add(pos)
 
 

@@ -54,7 +54,7 @@ class Tile(pygame.sprite.Sprite):
 
 
     def update(self, allowed,surface,pos=(-1,-1)):
-        if self.id in allowed:
+        if self.id in allowed and self.hits < 3:
 
             self.allow = True
             if self.rect.collidepoint(pos):
@@ -63,8 +63,11 @@ class Tile(pygame.sprite.Sprite):
                 self.selected = False
         else:
             self.allow = False
+            self.selected = False
+            
 
-        self.draw(surface)
+        if surface:
+            self.draw(surface)
 
 
 
@@ -97,6 +100,11 @@ class Tile(pygame.sprite.Sprite):
         return (prev, self.id)
 
     def new_num(self):
-        num = randint(1, 4)
+        x , y = self.location
+        if int(x/50) < 4 and int(x/50) > 1 and int(y/50) < 4 and int(y/50) > 1:
+            num =randint(1,3)
+            print("mid")
+        else:
+            num = randint(1, 4)
 
         return num
