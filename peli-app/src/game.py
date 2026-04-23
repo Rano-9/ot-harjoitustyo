@@ -1,11 +1,11 @@
 import pygame
 
 class GameLoop:
-    def __init__(self, game, renderer, event_queue, size):
+    def __init__(self, game, renderer, event_queue, board_size):
         self._scenes = game
         self._renderer = renderer
         self._event_queue = event_queue
-        self._size = size
+        self._board_size = board_size
         self._state = "start"
         self._score = 0
 
@@ -14,7 +14,7 @@ class GameLoop:
         pos = None
         click = False
 
-        #Katsotaan oliko eventtejä
+        #Katsotaan oliko eventtejä jonossa
         for event in self._event_queue.get():
             if event.type == pygame.QUIT:
                 return False
@@ -26,17 +26,31 @@ class GameLoop:
 
         #Jos oli tehdään jotain
         if click:
+
+            #Käydään läpi jokainen näkymä joka on nykyisessä tilanteessa.
             for scene in self._scenes[self._state]:
                 pos = pygame.mouse.get_pos()
 
-                for surface in scene.surfaces:
-                    if surface.rect.collidepoint(pos):
-                        if self._state == "start":
-                            self._state = surface.action()
+                #Käydään läpi näykmän elementit
+                for element in scene.surfaces:
 
-                        elif self._state == "game":
-                            if surface.allow and surface.hits < 3:
-                                record = surface.click()
+                    #Katsotaan onko hiiri päällä, jos ei ole skipataan listassa.
+
+                    if element.rect.collidepoint(pos):
+
+                        #Katsotaan mikä on elementin typpi
+                        #Tile ja Button elementeillä on action
+                        #Muilla elementeillä ei ole actioniä
+
+                        if element.type == "button":
+                            self._state = element.action()
+
+                        elif element.type == "tile":
+
+                            # Tarkistetaan voidaanko klikata
+                            
+                            if element.allow and element.hits < 3:
+                                record = element.action(self._board_size)
                                 allowed = scene.get_allowed(record[1],record[0])
                                 self._score += record[0]
                                 

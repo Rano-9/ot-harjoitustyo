@@ -8,14 +8,15 @@ dirname = os.path.dirname(__file__)
 
 class Tile(pygame.sprite.Sprite):
 
-    def __init__(self, loc=None):
+    def __init__(self, loc, board_size):
         super().__init__()
+        self.type = "tile"
         self._id = None
         self.allow = True
         self.selected = False
         self.location = loc
         self.hits = 0
-        self.num = self.new_num()
+        self.num = self.new_num(board_size)
 
         border_path = os.path.join(dirname,"assets","highlight.png")
         selection_path = os.path.join(dirname,"assets","selection.png")
@@ -43,6 +44,8 @@ class Tile(pygame.sprite.Sprite):
     def id(self,value):
         self._id = value
 
+    #Piirtää sen mukaan mitä update funktio asetti arvoja
+    #Images 1 on korostus reunus 2 valinta reunus.
 
     def draw(self,surface):
         surface.blit(self.image,self.rect)
@@ -52,6 +55,8 @@ class Tile(pygame.sprite.Sprite):
         elif self.allow:
             surface.blit(self.images[1],self.rect)
 
+
+    # Update funktio joka luo korostetuun reunukseen laatalle.
 
     def update(self, allowed,surface=None,pos=(-1,-1)):
         if self.id in allowed and self.hits < 3:
@@ -70,11 +75,13 @@ class Tile(pygame.sprite.Sprite):
             self.draw(surface)
 
 
+    #Elementin oma action. Kun on hiiri kohdallaan lasketaan uusi numero.
+    #Kuvake muuttuu numeron ja osumien mukaan.
 
-    def click(self):
+    def action(self,board_size):
         prev = self.num
 
-        self.num = self.new_num()
+        self.num = self.new_num(board_size)
         path = None
         self.hits += 1
 
@@ -99,11 +106,13 @@ class Tile(pygame.sprite.Sprite):
 
         return (prev, self.id)
 
-    def new_num(self):
+    def new_num(self,board_size):
         x , y = self.location
-        if int(x/50) < 4 and int(x/50) > 1 and int(y/50) < 4 and int(y/50) > 1:
-            num =randint(1,3)
-        else:
-            num = randint(1, 4)
 
+        num = randint(1, 4)
+
+        if int(x/50) + num >= board_size  and int(y/50) + num >= board_size and int(x/50) - num < 0 and int(y/50) - num < 0:
+            num =randint(1,3)
+            print("HEPS")
+            
         return num

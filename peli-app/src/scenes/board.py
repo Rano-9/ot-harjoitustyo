@@ -24,7 +24,7 @@ class Board:
                 x = cell_size/2
                 y = cell_size/2
                 coord = (x + j*cell_size,y + i*cell_size)
-                tile = Tile(coord)
+                tile = Tile(coord,board_size)
                 self.tiles.append(tile)
                 tile.id = len(self.tiles)-1
 
@@ -40,9 +40,9 @@ class Board:
         for i in range(-1,2):
             for j in range(-1,2):
                 pos_x = col + (i*num)
-                if pos_x < 6 and pos_x >=0:
+                if pos_x < self.board_size and pos_x >=0:
                     pos_y = row + (j*num)
-                    if pos_y < 6 and pos_y >=0:
+                    if pos_y < self.board_size and pos_y >=0:
                         pos = pos_y * self.board_size + pos_x
                         if pos != id and self.tiles[pos].hits < 3:
                             self.allowed.add(pos)

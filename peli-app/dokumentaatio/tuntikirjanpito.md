@@ -4,11 +4,11 @@
 | 3.4.  | 3    | Pelin ominaisuuksien lisäys|
 | 14.4. | 2    | Testien kirjoittaminen ja yleinen järjestyksen luominen |
 | 21.4. | 5    | Pelin uudelleen kirjoitusta. UI elementit toimivat uudella tavalla.|
+| 22.4. | 3    | Testien kirjoittelua ja dokumentaation päivitystä |
+| 23.4. | 3    | Pelin logiikan korjailua. Dokumentaation kirjausta |
 |       |      |            |
 |       |      |            |
 |       |      |            |
 |       |      |            |
 |       |      |            |
-|       |      |            |
-|       |      |            |
-| yht   | 15   |            |
+| yht   | 21   |            |

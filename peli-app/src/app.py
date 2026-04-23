@@ -8,14 +8,19 @@ from scenes.board import Board
 from scenes.menu import Menu
 from scenes.score import Score
 
+#Asetamme yleiset vakiot
+
 CELL_SIZE = 50
-BOARD_SIZE = 6
+BOARD_SIZE = 7
 FONT_SIZE = 30
 TXT_RGB = (255, 0, 0)
 BG_RGB = (0, 0, 0)
 
 
 def main():
+
+    #Lasketaan ikkunan koko kentän koon mukaan
+
     display_height = CELL_SIZE * BOARD_SIZE
     display_width = CELL_SIZE * BOARD_SIZE + 100
     display = pygame.display.set_mode((display_width, display_height))
@@ -32,7 +37,7 @@ def main():
     event_queue = EventQueue()
     renderer = Renderer(display, scenes)
 
-    game_loop = GameLoop(scenes, renderer, event_queue, CELL_SIZE)
+    game_loop = GameLoop(scenes, renderer, event_queue, BOARD_SIZE)
     game_loop.start()
 
     pygame.quit()

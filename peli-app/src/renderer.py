@@ -8,13 +8,22 @@ class Renderer:
 
     def render(self,state,allowed,score):
         mouse_pos = pygame.mouse.get_pos()
+
+        #käydään tilaan liittyvät näkymät
+        
         for scene in self._scenes[state]:
-            if state == "start":
+
+            #Katsotaan näkymän tyyppi:
+
+            if scene.type == "menu_scene":
 
                 self._surface.fill((0,0,0))
                 scene.surfaces.update(mouse_pos,self._surface)
 
-            elif state == "game":
+            #Katsomme näkymä tyypin tai tilan.
+            #Koska game tilassa on kaksi näkymää samaan aikaan. 
+
+            elif scene.type == "board_scene" or state == "game":
                 if scene.type == "board_scene":
                     allowed = scene.allowed
                     scene.surfaces.update(allowed,self._surface,mouse_pos)
@@ -26,7 +35,7 @@ class Renderer:
                         else:
                             sprite.update(self._surface)
 
-            elif state == "score":
+            elif scene.type == "score_scene":
                 self._surface.fill((0,0,0))
                 for sprite in scene.surfaces:
                     if sprite.type == "score":

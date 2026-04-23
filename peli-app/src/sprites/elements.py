@@ -2,6 +2,7 @@ import pygame
 import pygame.freetype
 from pygame.sprite import Sprite
 
+#Teksti alustojen luonti
 
 def create_text_element(text, font_size, txt_rgb, bg_rgb):
     font = pygame.freetype.SysFont("Courier", font_size, bold=True)
@@ -35,9 +36,13 @@ class Element_button(Sprite):
     def rect(self):
         return self.rects[1] if self._mouse_over else self.rects[0]
 
+    #Piirtää update funktion jälkeen.
+
     def draw(self,surface):
 
         surface.blit(self.image,self.rect)
+
+    #Update funktio pävitää onko hiiri päällä vai ei.
 
     def update(self, mouse_pos,surface=None):
 
@@ -80,6 +85,8 @@ class Element_score(Sprite):
     def draw(self,surface):
 
         surface.blit(self.image,self.rect)
+
+    #Päivitää pisteytyksen kun annettu uudet pisteet.
 
     def update(self,surface=None,score=0):
         self.images[0] = create_text_element(str(score),self._font_size,self._txt_rgb,self._bg_rgb)
