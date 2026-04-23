@@ -39,14 +39,14 @@ class Element_button(Sprite):
 
         surface.blit(self.image,self.rect)
 
-    def update(self, mouse_pos,surface):
+    def update(self, mouse_pos,surface=None):
 
         if self.rect.collidepoint(mouse_pos):
             self._mouse_over = True
         else:
             self._mouse_over = False
-
-        self.draw(surface)
+        if surface:
+            self.draw(surface)
 
     def action(self):
         return self._action
@@ -81,7 +81,7 @@ class Element_score(Sprite):
 
         surface.blit(self.image,self.rect)
 
-    def update(self,surface,score):
+    def update(self,surface=None,score=0):
         self.images[0] = create_text_element(str(score),self._font_size,self._txt_rgb,self._bg_rgb)
         self.draw(surface)
 
@@ -112,6 +112,7 @@ class Element_txt(Sprite):
 
         surface.blit(self.image,self.rect)
 
-    def update(self,surface):
-
-        self.draw(surface)
+    def update(self,surface=None):
+        
+        if surface:
+            self.draw(surface)

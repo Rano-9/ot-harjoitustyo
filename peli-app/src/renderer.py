@@ -15,7 +15,7 @@ class Renderer:
                 scene.surfaces.update(mouse_pos,self._surface)
 
             elif state == "game":
-                if scene.type == "board":
+                if scene.type == "board_scene":
                     allowed = scene.allowed
                     scene.surfaces.update(allowed,self._surface,mouse_pos)
 
