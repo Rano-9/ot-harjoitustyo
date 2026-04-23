@@ -35,7 +35,7 @@ class GameLoop:
                             self._state = surface.action()
 
                         elif self._state == "game":
-                            if surface.allow and surface.hits < 4:
+                            if surface.allow and surface.hits < 3:
                                 record = surface.click()
                                 allowed = scene.get_allowed(record[1],record[0])
                                 self._score += record[0]

@@ -6,6 +6,7 @@ from game import GameLoop
 
 from scenes.board import Board
 from scenes.menu import Menu
+from scenes.score import Score
 
 CELL_SIZE = 50
 BOARD_SIZE = 6
@@ -25,7 +26,7 @@ def main():
     scenes = {
         "start" : [Menu((display_width/2,display_height/2),["start","quit"],FONT_SIZE,TXT_RGB,BG_RGB)],
         "game"  : [Board(BOARD_SIZE, CELL_SIZE)],
-        "score" : [Menu((display_width/2,display_height/2),["OUT OF MOVES","QUIT"],FONT_SIZE,TXT_RGB,BG_RGB)]
+        "score" : [Score((display_width/2,display_height/2),["OUT OF MOVES","QUIT"],FONT_SIZE,TXT_RGB,BG_RGB)]
     }
 
     event_queue = EventQueue()

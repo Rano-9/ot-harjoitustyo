@@ -17,6 +17,7 @@ class Board:
         self.type = "board"
 
         index = 0
+        
         for i in range(board_size):
             for j in range(board_size):
                 x = cell_size/2

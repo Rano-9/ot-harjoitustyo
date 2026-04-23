@@ -56,6 +56,9 @@ class Element_score(Sprite):
         super().__init__()
         
         self.type = "score"
+        self._font_size = font_size
+        self._txt_rgb = txt_rgb
+        self._bg_rgb = bg_rgb
 
         self._mouse_over = False
         surface_images = create_text_element(str(text),font_size,txt_rgb,bg_rgb)
@@ -68,18 +71,18 @@ class Element_score(Sprite):
 
     @property
     def image(self):
-        return self.images[1] if self._mouse_over else self.images[0]
+        return self.images[0]
 
     @property
     def rect(self):
-        return self.rects[1] if self._mouse_over else self.rects[0]
+        return self.rects[0]
 
     def draw(self,surface):
 
         surface.blit(self.image,self.rect)
 
-    def update(self,surface):
-
+    def update(self,surface,score):
+        self.images[0] = create_text_element(str(score),self._font_size,self._txt_rgb,self._bg_rgb)
         self.draw(surface)
 
 class Element_txt(Sprite):
@@ -99,11 +102,11 @@ class Element_txt(Sprite):
 
     @property
     def image(self):
-        return self.images[1] if self._mouse_over else self.images[0]
+        return self.images[0]
 
     @property
     def rect(self):
-        return self.rects[1] if self._mouse_over else self.rects[0]
+        return self.rects[0]
 
     def draw(self,surface):
 
