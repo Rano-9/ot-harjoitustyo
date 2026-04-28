@@ -6,9 +6,9 @@
 | 21.4. | 5    | Pelin uudelleen kirjoitusta. UI elementit toimivat uudella tavalla.|
 | 22.4. | 3    | Testien kirjoittelua ja dokumentaation päivitystä |
 | 23.4. | 3    | Pelin logiikan korjailua. Dokumentaation kirjausta |
+| 28.4. | 2    | Dokumentaation tekemistä ja sekvenssikaavion luomista. |
 |       |      |            |
 |       |      |            |
 |       |      |            |
 |       |      |            |
-|       |      |            |
-| yht   | 21   |            |
+| yht   | 23   |            |

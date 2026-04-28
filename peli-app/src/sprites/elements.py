@@ -10,7 +10,7 @@ def create_text_element(text, font_size, txt_rgb, bg_rgb):
     return surface.convert_alpha()
 
 class Element_button(Sprite):
-    def __init__(self,center,text,font_size,txt_rgb,bg_rgb,action=None):
+    def __init__(self,center:tuple,text:str,font_size:int,txt_rgb:tuple,bg_rgb:tuple,action=None):
         super().__init__()
 
         self.type = "button"
@@ -57,7 +57,7 @@ class Element_button(Sprite):
         return self._action
 
 class Element_score(Sprite):
-    def __init__(self,center,text,font_size,txt_rgb,bg_rgb):
+    def __init__(self,center:tuple,text:str,font_size:int,txt_rgb:tuple,bg_rgb:tuple):
         super().__init__()
         
         self.type = "score"
@@ -89,11 +89,13 @@ class Element_score(Sprite):
     #Päivitää pisteytyksen kun annettu uudet pisteet.
 
     def update(self,surface=None,score=0):
+        
         self.images[0] = create_text_element(str(score),self._font_size,self._txt_rgb,self._bg_rgb)
-        self.draw(surface)
+        if surface:
+            self.draw(surface)
 
 class Element_txt(Sprite):
-    def __init__(self,center,text,font_size,txt_rgb,bg_rgb):
+    def __init__(self,center:tuple,text:str,font_size:int,txt_rgb:tuple,bg_rgb:tuple):
         super().__init__()
 
         self.type = "txt"

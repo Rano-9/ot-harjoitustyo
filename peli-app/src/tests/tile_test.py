@@ -5,12 +5,14 @@ class TestTile(unittest.TestCase):
     
     def setUp(self):
 
-        self.tile = Tile((0,0))
+        self.board_size = 6
+        self.tile = Tile((0,0),self.board_size)
 
         return super().setUp()
     
     def test_tile_inits(self):
         
+        self.assertEqual(self.tile.type,"tile")
         self.assertIsNotNone(self.tile.allow)
         self.assertIsNotNone(self.tile.hits)
         self.assertLessEqual(self.tile.num,4)
@@ -21,10 +23,12 @@ class TestTile(unittest.TestCase):
         pass
         
 
-    def test_tile_clicks(self):
+    def test_tile_action(self):
         num = self.tile.num
-        output = self.tile.click()
+        output = self.tile.action(self.board_size)
 
         self.assertEqual(output[1],None)
         self.assertEqual(output[0],num)
         pass    
+
+    
