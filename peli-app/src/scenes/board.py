@@ -53,7 +53,7 @@ class Board:
         Allowed setin getter
         
         Returns:
-            allowed_set: Sallitujen laattojen joukko
+            set(): Sallitujen laattojen joukko
         """
 
         return self.__allowed
