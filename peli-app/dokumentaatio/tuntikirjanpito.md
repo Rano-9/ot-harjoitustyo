@@ -7,7 +7,7 @@
 | 22.4. | 3    | Testien kirjoittelua ja dokumentaation päivitystä |
 | 23.4. | 3    | Pelin logiikan korjailua. Dokumentaation kirjausta |
 | 28.4. | 2    | Dokumentaation tekemistä ja sekvenssikaavion luomista. |
-|       |      |            |
+| 4.5.  | 4    | Dockstring dokumentaation tekemistä |
 |       |      |            |
 |       |      |            |
 |       |      |            |
