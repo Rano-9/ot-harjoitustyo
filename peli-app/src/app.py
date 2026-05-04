@@ -18,7 +18,7 @@ BG_RGB = (0, 0, 0)
 
 
 def main():
-
+    
     #Lasketaan ikkunan koko kentän koon mukaan
 
     display_height = CELL_SIZE * BOARD_SIZE
@@ -31,7 +31,7 @@ def main():
     scenes = {
         "start" : [Menu((display_width/2,display_height/2),["start","quit"],FONT_SIZE,TXT_RGB,BG_RGB)],
         "game"  : [Board(BOARD_SIZE, CELL_SIZE),Score((display_width-50,25),None,int(FONT_SIZE*0.7),TXT_RGB,BG_RGB)],
-        "score" : [Score((display_width/2,display_height/2),["OUT OF MOVES","QUIT"],FONT_SIZE,TXT_RGB,BG_RGB)]
+        "score" : [Score((display_width/2,display_height/2),True,FONT_SIZE,TXT_RGB,BG_RGB)]
     }
 
     event_queue = EventQueue()
