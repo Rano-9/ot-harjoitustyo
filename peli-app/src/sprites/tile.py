@@ -113,6 +113,5 @@ class Tile(pygame.sprite.Sprite):
 
         if int(x/50) + num >= board_size  and int(y/50) + num >= board_size and int(x/50) - num < 0 and int(y/50) - num < 0:
             num =randint(1,3)
-            print("HEPS")
-            
+
         return num
